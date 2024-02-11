@@ -12,34 +12,19 @@ const App = () => {
       .then(data => setBots(data));
   }, []);
 
-  const enlistBot = (bot) => {
-    if (!yourBotArmy.find(enlistedBot => enlistedBot.id === bot.id)) {
-      setYourBotArmy(prevState => [...prevState, bot]);
+  const handleToggleEnlist = (clickedBot) => {
+    if (yourBotArmy.some(bot => bot.id === clickedBot.id)) {
+      setYourBotArmy(prevState => prevState.filter(bot => bot.id !== clickedBot.id));
+    } else {
+      setYourBotArmy(prevState => [...prevState, clickedBot]);
     }
   };
-
-  const releaseBot = (botId) => {
-    setYourBotArmy(prevState => prevState.filter(bot => bot.id !== botId));
-  };
-
-  const dischargeBot = (botId) => {
-    fetch(`http://localhost:3000/bots/${botId}`, {
-      method: 'DELETE'
-    })
-    .then(response => {
-      if (response.ok) {
-        setYourBotArmy(prevState => prevState.filter(bot => bot.id !== botId));
-      }
-    })
-    .catch(error => console.error('Error discharging bot:', error));
-  };
-
 
   return (
     <div>
       <h1>Bot Battlr</h1>
-      <BotCollection bots={bots} enlistBot={enlistBot} />
-      <YourBotArmy yourBotArmy={yourBotArmy} releaseBot={releaseBot} dischargeBot={dischargeBot} />
+      <BotCollection bots={bots} handleToggleEnlist={handleToggleEnlist} />
+      <YourBotArmy yourBotArmy={yourBotArmy} handleToggleEnlist={handleToggleEnlist} />
     </div>
   );
 };
