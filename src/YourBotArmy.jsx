@@ -1,15 +1,20 @@
 import React from 'react';
 import Bot from './Bot';
 
-const YourBotArmy = ({ yourBotArmy, handleToggleEnlist }) => {
+const YourBotArmy = ({ yourBotArmy, handleToggleEnlist, handleDischarge }) => {
+  const handleDischargeClick = (botId) => {
+    handleDischarge(botId);
+  };
+
   return (
     <div>
-        <h2>YOUR BOT ARMY</h2>
-        <div className='bot'>
+      <h2>YOUR BOT ARMY</h2>
       {yourBotArmy.map(bot => (
-        <Bot key={bot.id} bot={bot} isEnlisted={true} handleToggleEnlist={handleToggleEnlist} />
+        <div key={bot.id} className='bot'>
+          <Bot bot={bot} isEnlisted={true} handleToggleEnlist={handleToggleEnlist} />
+          <button onClick={() => handleDischargeClick(bot.id)}>X</button>
+        </div>
       ))}
-    </div>
     </div>
   );
 };

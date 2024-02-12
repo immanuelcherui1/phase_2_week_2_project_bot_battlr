@@ -37,8 +37,8 @@ const App = () => {
     <div className='body'>
       <h1>BOT BATTLR</h1>
       <div className='botsDisplay'>
-        <BotCollection bots={bots} handleToggleEnlist={handleToggleEnlist} />
-        <YourBotArmy yourBotArmy={yourBotArmy} handleToggleEnlist={handleToggleEnlist} handleDischarge={handleDischarge} />
+        <BotCollection bots={bots} handleToggleEnlist={handleToggleEnlist} handleDischarge={handleDischarge} />
+        <YourBotArmy yourBotArmy={yourBotArmy} handleToggleEnlist={handleToggleEnlist} />
       </div>
     </div>
   );

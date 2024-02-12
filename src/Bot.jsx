@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Bot = ({ bot, isEnlisted, handleToggleEnlist, handleDischarge }) => {
+const Bot = ({ bot,  handleToggleEnlist}) => {
   const handleBotClick = () => {
     handleToggleEnlist(bot);
   };
 
-  const handleDischargeClick = () => {
-    handleDischarge(bot.id);
-  };
+  
 
   return (
     <div className='eachBot'>
@@ -45,7 +43,7 @@ const Bot = ({ bot, isEnlisted, handleToggleEnlist, handleDischarge }) => {
           </tbody>
         </table>
       </div>
-      {isEnlisted && <button onClick={() => handleDischargeClick(bot.id)}>X</button>}
+      
     </div>
   );
 };
