@@ -20,11 +20,26 @@ const App = () => {
     }
   };
 
+  const handleDischarge = (botId) => {
+    fetch(`http://localhost:3000/bots/${botId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        setBots(prevBots => prevBots.filter(bot => bot.id !== botId));
+        setYourBotArmy(prevState => prevState.filter(bot => bot.id !== botId));
+      }
+    })
+    .catch(error => console.error('Error discharging bot:', error));
+  };
+
   return (
-    <div>
-      <h1>Bot Battlr</h1>
-      <BotCollection bots={bots} handleToggleEnlist={handleToggleEnlist} />
-      <YourBotArmy yourBotArmy={yourBotArmy} handleToggleEnlist={handleToggleEnlist} />
+    <div className='body'>
+      <h1>BOT BATTLR</h1>
+      <div className='botsDisplay'>
+        <BotCollection bots={bots} handleToggleEnlist={handleToggleEnlist} />
+        <YourBotArmy yourBotArmy={yourBotArmy} handleToggleEnlist={handleToggleEnlist} handleDischarge={handleDischarge} />
+      </div>
     </div>
   );
 };
